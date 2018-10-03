@@ -8,7 +8,7 @@ e.g. with wercker
 
 ```
 test:
-  box: matsub/appengine-python3
+  box: matsub/appengine-python37
   steps:
     - script:
       name: install nose
