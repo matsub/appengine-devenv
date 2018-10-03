@@ -22,4 +22,6 @@ RUN apk --no-cache add \
     gcloud --version
 
 ENV CLOUDSDK_PYTHON=/usr/bin/python2
+RUN sed -i 's/env python/env python2/' /google-cloud-sdk/bin/dev_appserver.py
+
 VOLUME ["/root/.config"]
