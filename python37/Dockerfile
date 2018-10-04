@@ -12,6 +12,7 @@ RUN apk --no-cache add \
         openssh-client \
         git \
         gnupg \
+        gcc \
     && curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
     tar xzf google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
     rm google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
@@ -20,6 +21,7 @@ RUN apk --no-cache add \
     gcloud config set component_manager/disable_update_check true && \
     gcloud config set metrics/environment github_docker_image && \
     gcloud --version
+RUN gcloud components install app-engine-python
 
 ENV CLOUDSDK_PYTHON=/usr/bin/python2
 RUN sed -i 's/env python/env python2/' /google-cloud-sdk/bin/dev_appserver.py
