@@ -21,7 +21,20 @@ RUN apk --no-cache add \
     gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
     gcloud config set metrics/environment github_docker_image && \
+    gcloud components install app-engine-go && \
+    gcloud components remove bq gsutil && \
     gcloud --version
-RUN gcloud components install app-engine-go
+
+RUN rm -r \
+        /google-cloud-sdk/RELEASE_NOTES \
+        /google-cloud-sdk/README \
+        /google-cloud-sdk/VERSION \
+        /google-cloud-sdk/*.inc \
+        /google-cloud-sdk/deb \
+        /google-cloud-sdk/rpm \
+        /google-cloud-sdk/platform/ext-runtime \
+        /google-cloud-sdk/.install/.download \
+        /google-cloud-sdk/.install/.backup \
+    && find /google-cloud-sdk/ -name "*.pyc" -delete
 
 VOLUME ["/root/.config"]
