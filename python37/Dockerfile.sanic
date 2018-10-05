@@ -13,6 +13,10 @@ RUN apk --no-cache add \
         openssh-client \
         git \
         gnupg \
+        gcc \
+        g++ \
+        python3-dev \
+        make \
     && curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
     tar xzf google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
     rm google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
@@ -22,7 +26,8 @@ RUN apk --no-cache add \
     gcloud config set metrics/environment github_docker_image && \
     gcloud components install app-engine-python && \
     gcloud components remove bq gsutil && \
-    gcloud --version
+    gcloud --version && \
+    pip install grpcio==1.15.0 sanic==0.7.0
 
 RUN rm -r \
         /google-cloud-sdk/RELEASE_NOTES \
